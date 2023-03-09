@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-11">
+                <div class="d-flex justify-content-between mt-5 mb-5">
+                    <h2>Data schemas</h2>
+                    <a href="creating_schema" class="btn btn-success">New schema</a>
+                </div>
+                <table class="table table-bordered fw-normal">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Modified</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for el in schema %}
+                        <tr>
+                            <th scope="row">{{ el.id }}</th>
+                            <td><a href="data_sets/{{ el.id }}" style="text-decoration: none">{{ el.name }}</a></td>
+                            <td>{{ el.creation_date }}</td>
+                            <td><a href="editing_schema/{{ el.id }}" id="e_{{ el.id }}" style="text-decoration: none">Edit scheme</a>
+                                <a class="ms-4" href="delete_schema/{{ el.id }}" style="text-decoration: none; color: #D9534F">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

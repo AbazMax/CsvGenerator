@@ -1,0 +1,31 @@
+a.disabled{
+    pointer-events: none;
+    color: #c1e2c4;
+}
+
+.ready{
+    background-color: #198754;
+    border-radius: 5px;
+    color: white;
+    padding: 0.3rem;
+    width: 8rem;
+    text-align: center;
+}
+
+.not_ready{
+    background-color: #fc3e3e;
+    border-radius: 5px;
+    color: white;
+    padding: 0.3rem;
+    width: 8rem;
+    text-align: center;
+}
+
+.creating{
+    background-color: #ffa131;
+    border-radius: 5px;
+    color: white;
+    padding: 0.3rem;
+    width: 8rem;
+    text-align: center;
+}

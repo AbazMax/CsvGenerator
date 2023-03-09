@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 pb-5">
+                <div class="row">
+                    <form method="post">
+                    {% csrf_token %}
+                        <div class="row justify-content-between mt-4">
+                            <h2 class="mb-4 mt-4">New schema</h2>
+                            <div class="col-6">
+                                <p>
+                                    Name
+                                    <input type="text" id="name" class="form-control">
+                                </p>
+                                <p>
+                                    Column separator
+                                    <select id="col_sep" class="form-control">
+                                        <option value=",">Comma(,)</option>
+                                        <option value=";">Semicolon (;)</option>
+                                        <option value="|">Pipe(|)</option>
+                                        <option value="\t">Tab(\t)</option>
+                                        <option value=" ">Space(" ")</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    String character
+                                    <select id="str_char" class="form-control">
+                                        <option value="'">Quote(')</option>
+                                        <option value='"'>Double-quote(")</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="col-1 me-4">
+                                <div id="save_btn" class="btn btn-primary">Submit</div>
+                            </div>
+                        </div>
+                        <div id="columns">
+                            <h2 class="mb-4 mt-4">Schema columns</h2>
+                        </div>
+                    </form>
+                    <div class="col-2">
+                        <button class="btn btn-primary" id="add_col">Add column</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

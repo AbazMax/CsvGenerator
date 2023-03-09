@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+        <div class="row p-5 mx-5 mt-5" style="text-align: center">
+            <h1>Login</h1>
+            <div class="p-3">{{ form.username }}</div>
+            <div class="p-3">{{ form.password }}</div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="login" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </div>
+    </form>
+
+    <section class="mt-2" style="text-align: center">
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+            {% endif %}
+        {% endif %}
+    </section>
+
+{% endblock %}

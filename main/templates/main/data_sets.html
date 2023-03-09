@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="container fw-normal">
+        <div class="row">
+            <div class="d-flex align-items-end mt-5 mb-5">
+                    <h2 class="mb-0">Sample Schema <span>#{{ schema.id }}</span></h2>
+                    <div class="ms-3"><a href="/editing_schema/{{ schema.id }}" id="e_{{ schema.id }}" style="text-decoration: none">Edit scheme</a></div>
+                    <input id="sch_id" type="hidden" value="{{ schema.id }}">
+            </div>
+            <div class="col-6">
+                <table class="table col-6 table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Column name</th>
+                            <th scope="col">Column type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for col in col_item %}
+                        <tr>
+                            <th scope="row">{{ col.order }}</th>
+                            <td>{{ col.col_name }}</td>
+                            <td>{{ col.col_type }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-11">
+                <div class="row justify-content-between mt-4 mb-4">
+                    <div class="col-3">
+                        <h2>Data sets</h2>
+                    </div>
+                    <div class="col-4">
+                        <div class="row align-items-center" method="post">
+                            <div class="col-2">Rows:</div>
+                                <div class="col-4"><input class="form-control" id="rows" type="number" value="500"></div>
+                            <div class="col-6"><button class="btn btn-success" id="gen_data">Generate data</button></div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered fw-normal">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Schema name</th>
+                            <th scope="col">Created</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for s in schemas %}
+                        <tr id="s_{{ s.id }}">
+                            <th scope="row">{{ s.id }}</th>
+                            <td>{{ s.name }}</td>
+                            <td>{{ s.updated }}</td>
+                            {% if  s.is_created %}
+                                <td><div id="indicator" class="ready">Ready</div></td>
+                                <td><a href="/{{ s.file_link }}" style="text-decoration: none">Download</a></td>
+                            {% else %}
+                                <td><div id="indicator" class="not_ready">Not ready</div></td>
+                                <td><a class="disabled" href="/{{ s.file_link }}" style="text-decoration: none">Download</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 pb-5">
+                <div class="row">
+                    <form method="post">
+                    {% csrf_token %}
+                        <div class="row justify-content-between mt-4">
+                            <h2 class="mb-4 mt-4" id="edit_template">Edit schema <span id="schema_id">#{{ schema.id }}</span></h2>
+                            <div class="col-6">
+                                <p>
+                                    Name
+                                    <input type="text" id="name" class="form-control" value="{{ schema.name }}">
+                                </p>
+                                <p>
+                                    Column separator
+                                    <select name="col_sep" id="col_sep" class="form-control">
+                                        <option value=",">Comma(,)</option>
+                                        <option value=";">Semicolon (;)</option>
+                                        <option value="|">Pipe(|)</option>
+                                        <option value="\t">Tab(\t)</option>
+                                        <option value=" ">Space(" ")</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    String character
+                                    <select name="str_char" id="str_char" class="form-control">
+                                        <option value="'">Quote(')</option>
+                                        <option value='"'>Double-quote(")</option>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="col-1 me-4">
+                                <div id="save_btn" class="btn btn-primary">Submit</div>
+                            </div>
+                        </div>
+                        <div id="columns">
+                            <h2 class="mb-4 mt-4">Schema columns</h2>
+
+                            {% for col in columns %}
+                                <div class="row" id="{{ col.user_id }}">
+                                    <div class="col-4">
+                                        <p>
+                                            Column name<br>
+                                            <input type="text" name="name" class="form-control" value="{{ col.col_name }}">
+                                        </p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p>
+                                            Type<br>
+                                            <select name="col_type" class="form-control" id="{{ col.user_id }}" data-type="col_type">
+                                            <option value="full_name">Full name</option>
+                                            <option value="age">Age</option>
+                                            <option value="phone_number">Phone number</option>
+                                            <option value="address">Address</option>
+                                            <option value="date">Date</option>
+                                            <option value="job">Job</option>
+                                            <option value="company">Company</option>
+                                        </select>
+                                        </p>
+                                    </div>
+                                    <div class="row col-2 invisible">
+                                        <div class="col-6">
+                                            Min<br>
+                                            <input name="range-min" class="form-control" type="number">
+                                        </div>
+                                        <div class="col-6">
+                                            Max<br>
+                                            <input name="range-max" class="form-control" type="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <p>
+                                        Order<br>
+                                        <input name="order" class="form-control" type="number" value="{{ col.order }}">
+                                        </p>
+                                    </div>
+                                    <div class="col-1">
+                                    <div class="delete_col_btn" id="{{ col.user_id }}" style="color: #D9534F">Delete</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                    <div class="col-2">
+                        <button class="btn btn-primary" id="add_col">Add column</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
